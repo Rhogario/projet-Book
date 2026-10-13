@@ -102,14 +102,14 @@ def transform() :
     'prix':'price'
 })
 
+  #Nettoyer la colonne price pour pouvoir l'utiliser en float
+  livres['price'] = livres['price'].str.replace('£','')
+  livres['price'] = pd.to_numeric(livres['price'])
+
   #créer un df intermédiaire où on prend que les colonnes souhaitées
   sales_enriched = sales[['country_code','quantity','discount_rate','book_name','order_id']].merge(countries[['country_code','country_name']],on='country_code',how='left')
 
   sales_enriched = sales_enriched.merge(livres,on='book_name',how='left')
-
-  #Nettoyer la colonne price pour pouvoir l'utiliser en float
-  sales_enriched['price'] = sales_enriched['price'].str.replace('£','')
-  sales_enriched['price'] = pd.to_numeric(sales_enriched['price'])
 
   #Vérifier si il y a des livres qui n'ont pas de correspondance
   check = sales_enriched['price'].isna().sum()
