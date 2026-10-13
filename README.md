@@ -135,7 +135,10 @@ La clé SSH permet de s'authentifier auprès de GitHub afin de publier le projet
 
 
 
-Générer une clé SSH avec la commande ssh-keygen -t ed25519.
+Générer une clé SSH avec la commande 
+ssh-keygen -t ed25519 .
+
+puis l'afficher via -t ed25519
 
 
 
